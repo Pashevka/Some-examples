@@ -1,3 +1,7 @@
+import { f } from "./Circle"
+
 export const resultFunction = (x, y) => {
-    return x > y ? 1 : 0
+    // y = kx
+    const lineY = f(x)
+    return y > lineY ? 1 : 0
 }

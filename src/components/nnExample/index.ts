@@ -1,64 +1,60 @@
 import p5 from "p5";
 import { canvasWidth, canvasHeight } from "../../constants";
-import { Circle } from "./Circle";
+import { Circle, f } from "./Circle";
 import { NeuralNetwork } from "./NeuralNetwork";
+import { Matrix } from "../../helpers/matrix";
+export let k = 0.2
+export let b = 0.3
 
-const circlesArray: Circle[] = []
-const maxCirclesAmount = 5000
-const circlesAmount = 4000
-const Mozg = new NeuralNetwork()
 let slider;
-console.log("🚀 ~ Mozg:", Mozg)
+let slider2;
 
 new p5((p: p5) => {
+    const Mozg = new NeuralNetwork(2, 2, 2)
+    const circlesArray: Circle[] = []
+    const maxCirclesAmount = 1000
+
     p.setup = () => {
         p.createCanvas(canvasWidth, canvasHeight);
 
-
         for (let i = 0; i < maxCirclesAmount; i++) {
-            const circle = new Circle(p.random(0, canvasWidth), p.random(0, canvasHeight))
-            // const circle = new Circle(20, 40)
+            const circle = new Circle(p)
             circlesArray.push(circle)
         }
-        p.frameRate(2)
-        slider = p.createSlider(0, maxCirclesAmount, circlesAmount)
+
+        const inputs = [0.2, 1]
+        const targets = [1, 0]
+
+        // const res = Mozg.feedForward(inputs)
+        const res2 = Mozg.train(inputs, targets)
+        console.log("🚀 ~ newp5 ~ res2:", res2)
+
+
+        slider = p.createSlider(-2, 2, k, 0.01)
         slider.size(600);
+
+
+        slider2 = p.createSlider(-2, 2, k, 0.01)
+        slider2.size(600);
     };
     p.draw = () => {
         p.clear();
-        p.background(0);
-        // p.translate(p.width / 2, p.height / 2);
-        p.fill(255);
+        k = slider.value()
+        b = slider2.value()
 
-        for (let maxCirclesAmount = 0; maxCirclesAmount < slider.value(); maxCirclesAmount++) {
-            const element = circlesArray[maxCirclesAmount];
-            element.show(p, Mozg)
+        circlesArray.forEach(circle => {
+            // circle.show(p, Mozg)
+        })
 
-        }
-        // circlesArray.forEach(circle => {
-        //     circle.show(p, Mozg)
-        // })
+        // Mozg.show(p)
 
-        // p.stroke(255)
-        p.line(0, 0, canvasWidth, canvasHeight)
+        // const p1 = new Circle(p, -1, f(-1))
+        // const p2 = new Circle(p, 1, f(1))
+        // p.line(p1.pixelX, p1.pixelY, p2.pixelX, p2.pixelY)
+        // // p.line(0, p.height, p.width, 0)
+        // const np1 = new Circle(p, -1, Mozg.resultY(-1))
+        // const np2 = new Circle(p, 1, Mozg.resultY(1))
 
-        p.push()
-        p.fill('white')
-        p.circle(250, 50, 50)
-        p.circle(250, 150, 50)
-        p.circle(450, 100, 50)
-        p.line(250, 50, 450, 100)
-        p.line(250, 150, 450, 100)
-        p.textSize(22)
-        p.text(Mozg.w1.toFixed(4), 300, 70)
-        p.text(Mozg.w2.toFixed(4), 300, 140)
-        p.pop()
+        // p.line(np1.pixelX, np1.pixelY, np2.pixelX, np2.pixelY)
     };
-
-    p.mouseWheel = () => {
-        const randomIndex = Math.floor(Math.random() * circlesArray.length)
-        Mozg.train(circlesArray[randomIndex].x, circlesArray[randomIndex].y, circlesArray[randomIndex].getRightColor())
-        // Mozg.train(item.x, item.y, item.getRightColor())
-        console.log('trained')
-    }
 });
