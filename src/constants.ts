@@ -1,3 +1,3 @@
-export const canvasWidth = 750
-// export const canvasHeight = canvasWidth / 9 * 16
-export const canvasHeight = canvasWidth
+export const canvasWidth = 700
+export const canvasHeight = canvasWidth / 9 * 16
+// export const canvasHeight = canvasWidth

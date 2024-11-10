@@ -3,7 +3,9 @@ export function recordCanvasHandler(button: HTMLButtonElement) {
     chunks.length = 0;
     let stream = document.querySelector('canvas').captureStream(60);
     console.log("🚀 ~ recordCanvasHandler ~ stream:", stream)
-    const recorder = new MediaRecorder(stream);
+    const recorder = new MediaRecorder(stream, {
+        mimeType: "video/webm; codecs=vp9"
+    });
     recorder.ondataavailable = e => {
         if (e.data.size) {
             chunks.push(e.data);

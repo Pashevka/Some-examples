@@ -65,12 +65,26 @@ export class Matrix {
         return result
     }
 
-    multiply(n: number): void {
-        this.data = this.data.map(rows => {
-            return rows.map(value => {
-                return value * n
+    multiply(n: number | Matrix): void {
+        if (n instanceof Matrix) {
+            if (this.rows !== n.rows || this.cols !== n.cols) {
+                console.error('Columns and Rows should be the same')
+                return undefined
+            }
+            this.data = this.data.map((rows, i) => {
+                return rows.map((value, j) => {
+                    return value * n.data[i][j]
+                })
             })
-        })
+
+        } else {
+
+            this.data = this.data.map(rows => {
+                return rows.map(value => {
+                    return value * n
+                })
+            })
+        }
     }
 
     map(fn: Function): void {

@@ -3,5 +3,24 @@
 2) Показать и рассказать про p5.js (part1)
 
 3) Рассказать, какая цель у нас на этот урок
+    - Взять уравнение прямой и классифицировать точки с разных сторон
 
-4) Показать уравнение прямой и распределение точек
+4) Показать уравнение прямой (part2)
+5) Показать распределение точек на плоскости и покрасить их в зависимости от того, где они находятся (part 3)
+6) Создать класс Circle (Part 4)
+7) Подумать и порисовать на тему того, что должно быть в классе нейросетей и какие там должны быть методы и данные
+    - Perceptron
+        - one of the simplest artificial neural network architectures
+        - Perceptron is a type of neural network that performs binary classification that maps input features to an output decision, usually classifying data into one of two categories, such as 0 or 1.
+        - "linearly separable patterns"
+    - Single-Layer Perceptron is a type of perceptron is limited to learning linearly separable patterns. It is effective for tasks where the data can be divided into distinct categories through a straight line. While powerful in its simplicity, it struggles with more complex problems where the relationship between inputs and outputs is non-linear.
+    - Multi-Layer Perceptron possess enhanced processing capabilities as they consist of two or more layers, adept at handling more complex patterns and relationships within the data.
+    Basic Components of Perceptron
+    - Input Features: The perceptron takes multiple input features, each representing a characteristic of the input data.
+    - Weights: Each input feature is assigned a weight that determines its influence on the output. These weights are adjusted during training to find the optimal values.
+    - Summation Function: The perceptron calculates the weighted sum of its inputs, combining them with their respective weights.
+    - Activation Function: The weighted sum is passed through the Heaviside step function, comparing it to a threshold to produce a binary output (0 or 1).
+    - Output: The final output is determined by the activation function, often used for binary classification tasks.
+    - Bias: The bias term helps the perceptron make adjustments independent of the input, improving its flexibility in learning.
+    - Learning Algorithm: The perceptron adjusts its weights and bias using a learning algorithm, such as the Perceptron Learning Rule, to minimize prediction errors.
+

@@ -5,15 +5,25 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
+
   <title>Vite + TS</title>
 </head>
 
 <body>
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script> -->
-  <!-- <script src="https://cdn.jsdelivr.net/npm/ccapture.js-npmfixed@1.1.0/build/CCapture.all.min.js"></script> -->
+  <script src="./node_modules/ccapture.js/src/CCapture.js"></script>
+  <!-- Include WebM Writer if you want to export WebM -->
+  <script src="./node_modules/ccapture.js/src/webm-writer-0.2.0.js"></script>
+  <!-- Include gifjs if you want to export GIF -->
+  <script src="./node_modules/ccapture.js/src/gif.js"></script>
+  <!-- Include tar.js if you want to export PNG or JPEG -->
+  <script src="./node_modules/ccapture.js/src/tar.js"></script>
+  <!-- Include download.js for easier file download -->
+  <script src="./node_modules/ccapture.js/src/download.js"></script>
+  <!-- <script src="./src/libs/webm-writer-0.3.0.js"></script> -->
   <div id="app"></div>
-  <!-- <button>start recording</button><br> -->
+  <button>start recording</button><br>
+  <button>stop recording</button><br>
   <script type="module" src="/src/main.ts"></script>
 </body>
 

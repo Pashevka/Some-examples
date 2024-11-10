@@ -32,6 +32,10 @@ export class NeuralNetwork {
         this.biasO.randomize()
     }
 
+    setLearningRate(learningRate: number) {
+        this.lr = learningRate
+    }
+
     activationFunction(sum: number) {
         return DumbMath.sigmoid(sum)
     }
@@ -53,10 +57,10 @@ export class NeuralNetwork {
 
     }
 
-    train(inputs: number[], answer: number[]) {
+    train(inputsArray: number[], targetArray: number[]) {
 
         // start feed forward
-        let inputAsMatrix = Matrix.fromArray(inputs)
+        let inputAsMatrix = Matrix.fromArray(inputsArray)
 
         let hidden = Matrix.multiply(this.weightsIH, inputAsMatrix)
         hidden.add(this.biasH)
@@ -67,22 +71,25 @@ export class NeuralNetwork {
         outputs.map(this.activationFunction)
         // end of feed forward 
 
-        const targetsMatrix = Matrix.fromArray(answer)
+        const targetsMatrix = Matrix.fromArray(targetArray)
 
         // calc error
         // ERROR = TARGET - OUTPUTS
 
         let outputErrors = Matrix.subtract(targetsMatrix, outputs)
         let gradients = Matrix.map(outputs, DumbMath.dsigmoid)
-        gradients = Matrix.multiply(outputs, outputErrors)
+        gradients.multiply(outputErrors)
         gradients.multiply(this.lr)
+
 
         // Calculate deltas
         const hiddenT = Matrix.transpose(hidden)
         const weightsHODeltas = Matrix.multiply(gradients, hiddenT)
 
-        // 
+        // Adjust the weights bu deltas 
         this.weightsHO.add(weightsHODeltas)
+        // Adjust the bias by its deltas this is gradients
+        this.biasO.add(gradients)
 
 
 
@@ -93,7 +100,7 @@ export class NeuralNetwork {
 
         // Calculate hidden gradients
         let hiddenGradients = Matrix.map(hidden, DumbMath.dsigmoid)
-        hiddenGradients = Matrix.multiply(hiddenGradients, hiddenErrors)
+        hiddenGradients.multiply(hiddenErrors)
         hiddenGradients.multiply(this.lr)
 
         // Calculate input to hidden deltas
@@ -102,6 +109,9 @@ export class NeuralNetwork {
         let weightsIHDeltas = Matrix.multiply(hiddenGradients, inputsT)
 
         this.weightsIH.add(weightsIHDeltas)
+
+        // Adjust the bias by its deltas this is gradients
+        this.biasH.add(hiddenGradients)
 
 
     }

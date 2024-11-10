@@ -1,3 +1,12 @@
 // import * as part1 from './part1'
-import * as part2 from './part2'
-console.log("🚀 ~ part1:", part2)
+// import * as part2 from './part2'
+// import * as part3 from './part3'
+// import * as part4 from './part4/part4'
+// import * as part5 from './part5/part5'
+// import * as part6 from './part6/part6'
+// import * as part7 from './part7/part7'
+// import * as part8 from './part8/part8'
+// import * as part9 from './part9/part9'
+// import * as part10 from './part10/part10'
+import * as part11 from './part11/part11'
+console.log("🚀 ~ part1:", part11)
